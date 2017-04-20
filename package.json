@@ -4,7 +4,6 @@
   "description": "abstract syntax tree class for js",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm install",
     "test": "ava \"test/spec/**/*.js\""
   },
   "repository": {
