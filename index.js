@@ -6,6 +6,9 @@ const escodegen = require('escodegen');
 const estraverse = require('estraverse');
 const comparify = require('comparify');
 const beautify = require('js-beautify').js_beautify;
+const esBeautifier = require('es-beautifier');
+const path = require('path');
+const execFileSync = require('child_process').execFileSync;
 
 class AbstractSyntaxTree {
 
@@ -81,9 +84,34 @@ class AbstractSyntaxTree {
         });
 
         if (options.beautify) {
-            source = beautify(source, {
-                end_with_newline: true
-            });
+            function execCLI(input, opts = []) {
+                const cli = path.resolve(__dirname, 'node_modules/es-beautifier/lib/cli.js');
+                return execFileSync('node', [cli, ...opts], { input, encoding: 'utf8' });
+            }
+            // require('eslint/lib/config/plugins').define('es-beautifier', esBeautifier);
+            // const CLIEngine = require('eslint').CLIEngine;
+
+            // const config = esBeautifier.configs[options.config];
+            // if (!config) {
+            //     console.error('no such config');
+            //     process.exit(1);
+            // }
+
+            // config.fix = true;
+            // config.useEslintrc = !!options.useEslintrc;
+            // const cli = new CLIEngine(config);
+
+            const opts = [];
+            // if (options.useEslintrc) {
+                opts.push('--use-eslintrc');
+            // }
+            const beautified = execCLI(source, opts);
+            source = beautified;
+
+            // Original line
+            // source = beautify(source, {
+            //     end_with_newline: true
+            // });
         }
 
         if (options.comments) {
