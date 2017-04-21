@@ -105,7 +105,6 @@ class AbstractSyntaxTree {
             // if (options.useEslintrc) {
                 opts.push('--use-eslintrc');
             // }
-            opts.push('--fix');
             const beautified = execCLI(source, opts);
             source = beautified;
 
@@ -113,6 +112,9 @@ class AbstractSyntaxTree {
             // source = beautify(source, {
             //     end_with_newline: true
             // });
+
+            var afterImportGroup = /import\s(.|\n)*(?=\nconst)|import\s(.|\n)*(?=\nlet)|import\s(.|\n)*(?=\nvar)|import\s(.|\n)*(?=\nexport)/g;
+            source = source.replace(afterImportGroup, '$&' + '\n');
         }
 
         if (options.comments) {
@@ -120,6 +122,7 @@ class AbstractSyntaxTree {
             // this solution simply puts all of the comments at the top of the file
             // so you at least do not lose them
             source = this.comments.map(comment => {
+                console.log(comment);
                 var value = comment.value.trim();
                 if (comment.type === 'Block') {
                     return '/* ' + value + ' */\n';
