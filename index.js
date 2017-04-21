@@ -122,7 +122,6 @@ class AbstractSyntaxTree {
             // this solution simply puts all of the comments at the top of the file
             // so you at least do not lose them
             source = this.comments.map(comment => {
-                console.log(comment);
                 var value = comment.value.trim();
                 if (comment.type === 'Block') {
                     return '/* ' + value + ' */\n';
