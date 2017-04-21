@@ -105,6 +105,7 @@ class AbstractSyntaxTree {
             // if (options.useEslintrc) {
                 opts.push('--use-eslintrc');
             // }
+            opts.push('--fix');
             const beautified = execCLI(source, opts);
             source = beautified;
 
