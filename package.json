@@ -4,7 +4,6 @@
   "description": "abstract syntax tree class for js",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm install && cd ./node_modules/es-beautifier/ && npm install",
     "test": "ava \"test/spec/**/*.js\""
   },
   "repository": {
@@ -35,7 +34,7 @@
     "escodegen": "1.8.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-import": "git://github.com/machineloop/eslint-plugin-import.git#master",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "esquery": "1.0.0",
